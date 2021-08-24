@@ -1,0 +1,13 @@
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\bin\Debug\netcoreapp3.1\PdfToImages.exe
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\bin\Debug\netcoreapp3.1\PdfToImages.deps.json
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\bin\Debug\netcoreapp3.1\PdfToImages.runtimeconfig.json
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\bin\Debug\netcoreapp3.1\PdfToImages.runtimeconfig.dev.json
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\bin\Debug\netcoreapp3.1\PdfToImages.dll
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\bin\Debug\netcoreapp3.1\PdfToImages.pdb
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\obj\Debug\netcoreapp3.1\PdfToImages.csprojAssemblyReference.cache
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\obj\Debug\netcoreapp3.1\PdfToImages.AssemblyInfoInputs.cache
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\obj\Debug\netcoreapp3.1\PdfToImages.AssemblyInfo.cs
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\obj\Debug\netcoreapp3.1\PdfToImages.csproj.CoreCompileInputs.cache
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\obj\Debug\netcoreapp3.1\PdfToImages.dll
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\obj\Debug\netcoreapp3.1\PdfToImages.pdb
+D:\projects\pdf-to-images\sources\PdfToImages\PdfToImages\obj\Debug\netcoreapp3.1\PdfToImages.genruntimeconfig.cache
