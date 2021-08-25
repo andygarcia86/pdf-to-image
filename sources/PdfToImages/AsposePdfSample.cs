@@ -15,7 +15,7 @@ namespace PdfToImages
 
         public static string ConverstPDFtoImage(string fileName, int pageNumber = 1, bool allPages = false)
         {
-            var imgUrl = "D:/projects/pdf-to-images/images/image_out.jpeg";
+            var imgUrl = "D:/andy/projects/pdf-to-image/images/image_out.jpeg";
 
             // Open document
             var pdfDocument = new Document(fileName);
@@ -47,7 +47,7 @@ namespace PdfToImages
                             var pHeight = (int)pdfDocument.Pages[pageCount].PageInfo.Height;
 
                             JpegDevice JpegDevice = new JpegDevice(pWidth, pHeight, resolution);
-                            JpegDevice.Process(pdfDocument.Pages[pageCount], imageStream);
+                            JpegDevice.Process(pdfDocument.Pages[pageCount], imagePageStream);
                             imagePageStream.CopyTo(imageStream);
                         }
                     }
