@@ -6,7 +6,7 @@ namespace PdfToImages
     {
         static void Main(string[] args)
         {
-            string _dataDir = "D:/projects/pdf-to-images/";
+            string _dataDir = "C:/pdfs/pdf-to-image/";
             string pdfFileName = _dataDir + "pdf-samples/multi-pages-portrait.pdf";
 
             var pages = AsposePdfSample.GetPdfTotalPages(pdfFileName);

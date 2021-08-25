@@ -1,6 +1,7 @@
 ﻿using Aspose.Pdf;
 using Aspose.Pdf.Devices;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace PdfToImages
@@ -13,73 +14,50 @@ namespace PdfToImages
             return pdfDocument.Pages.Count;
         }
 
+        private static string getPdfPagePreview(String folderName, Page pdfPage) {
+            var imgUrl = "C:/pdfs/pdf-to-image/"+ folderName + "/ " + pdfPage.Number + ".jpeg";
+            using (var imageStream = new FileStream(imgUrl, FileMode.Create))
+            {
+                // Create Resolution object
+                var pageWidth = (int) pdfPage.PageInfo.Width;
+                var pageHeight = (int)pdfPage.PageInfo.Height;
+                var resolution = new Resolution(300);
+
+                // Create Jpeg device with specified attributes
+                // Width, Height, Resolution
+                JpegDevice JpegDevice = new JpegDevice(pageWidth, pageHeight, resolution);
+
+                // Convert a particular page and save the image to stream
+                JpegDevice.Process(pdfPage, imageStream);
+
+                //imageStream.CopyTo
+
+                // Close stream
+                imageStream.Close();
+            }
+            return imgUrl;
+        }
+
         public static string ConverstPDFtoImage(string fileName, int pageNumber = 1, bool allPages = false)
         {
-            var imgUrl = "D:/projects/pdf-to-images/images/image_out.jpeg";
-
+            Guid g = Guid.NewGuid();
             // Open document
             var pdfDocument = new Document(fileName);
 
             if (allPages)
             {
-                double imgWidth = 0;
-                double imgHeight = 0;
-
-                foreach (var page in pdfDocument.Pages)
                 {
-                    imgWidth = page.PageInfo.Width > imgWidth ? page.PageInfo.Width : imgWidth;
-                    imgHeight += page.PageInfo.Height;
-                }
-
-                Console.WriteLine("imgWidth: " + imgWidth);
-                Console.WriteLine("imgHeight: " + imgHeight);
-
-                using (var imageStream = File.Create(imgUrl))
-                {
-                    // Create Resolution object
-                    var resolution = new Resolution(300);
-
                     for (int pageCount = 1; pageCount <= pdfDocument.Pages.Count; pageCount++)
                     {
-                        using (var imagePageStream = new MemoryStream())
-                        {
-                            var pWidth = (int)pdfDocument.Pages[pageCount].PageInfo.Width;
-                            var pHeight = (int)pdfDocument.Pages[pageCount].PageInfo.Height;
-
-                            JpegDevice JpegDevice = new JpegDevice(pWidth, pHeight, resolution);
-                            JpegDevice.Process(pdfDocument.Pages[pageCount], imageStream);
-                            imagePageStream.CopyTo(imageStream);
-                        }
+                        getPdfPagePreview(g.ToString(), pdfDocument.Pages[pageCount]);
                     }
-
-                    // Close stream
-                    imageStream.Close();
                 }
             }
-            else
-            {
-                using (var imageStream = new FileStream(imgUrl, FileMode.Create))
-                {
-                    // Create Resolution object
-                    var resolution = new Resolution(300);
+            else {
+                getPdfPagePreview(g.ToString(), pdfDocument.Pages[pageNumber]);
+            }  
 
-                    // Create Jpeg device with specified attributes
-                    // Width, Height, Resolution
-                    JpegDevice JpegDevice = new JpegDevice(500, 700, resolution);
-
-
-
-                    // Convert a particular page and save the image to stream
-                    JpegDevice.Process(pdfDocument.Pages[pageNumber], imageStream);
-
-                    //imageStream.CopyTo
-
-                    // Close stream
-                    imageStream.Close();
-                }
-            }            
-
-            return imgUrl;
+            return "";
         }
 
         
