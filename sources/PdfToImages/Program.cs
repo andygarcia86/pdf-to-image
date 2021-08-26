@@ -6,15 +6,16 @@ namespace PdfToImages
     {
         static void Main(string[] args)
         {
-            string _dataDir = "C:/pdfs/pdf-to-image/";
-            string pdfFileName = _dataDir + "pdf-samples/multi-pages-portrait.pdf";
+            string _dataDir = System.IO.Path.GetFullPath(@"..\..\..\");
+            string pdfFileName = _dataDir + "pdf-samples/single-page-landscape.pdf";
 
             var pages = AsposePdfSample.GetPdfTotalPages(pdfFileName);
 
             var pageNumber = 1;
             var allPages = true;
 
-            var imgUrl = AsposePdfSample.ConverstPDFtoImage(pdfFileName, pageNumber, allPages);
+            var imgUrl = AsposePdfSample.ConvertPDFtoImage(pdfFileName, pageNumber, allPages);
+
         }
     }
 }
