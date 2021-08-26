@@ -7,7 +7,7 @@ namespace PdfToImages
         static void Main(string[] args)
         {
             string _dataDir = System.IO.Path.GetFullPath(@"..\..\..\");
-            string pdfFileName = _dataDir + "pdf-samples/single-page-landscape.pdf";
+            string pdfFileName = _dataDir + "pdf-samples/multi-pages-portrait.pdf";
 
             var pages = AsposePdfSample.GetPdfTotalPages(pdfFileName);
 

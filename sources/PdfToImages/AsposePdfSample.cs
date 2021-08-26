@@ -1,5 +1,6 @@
 ﻿using Aspose.Pdf;
 using Aspose.Pdf.Devices;
+using Aspose.Pdf.Facades;
 using System;
 using System.IO;
 
@@ -15,7 +16,7 @@ namespace PdfToImages
             return pdfDocument.Pages.Count;
         }
 
-        private static string GetPdfPagePreview(string folderName, Page pdfPage) {
+        private static string GetPdfPagePreview(string folderName, Page pdfPage, bool isLandscape) {
             var imgUrl = _dataDir + "images\\" + folderName + "\\" + pdfPage.Number + ".jpeg";
 
             Directory.CreateDirectory(_dataDir + "images\\" + folderName);
@@ -23,8 +24,8 @@ namespace PdfToImages
             using (var imageStream = new FileStream(imgUrl, FileMode.Create))
             {
                 // Create Resolution object
-                var pageWidth = (int) pdfPage.PageInfo.Width;
-                var pageHeight = (int) pdfPage.PageInfo.Height;
+                var pageWidth = !isLandscape ? (int) pdfPage.PageInfo.Width : (int)pdfPage.PageInfo.Height;
+                var pageHeight = !isLandscape ? (int) pdfPage.PageInfo.Height : (int)pdfPage.PageInfo.Width;
                 var resolution = new Resolution(300);
 
                 // Create Jpeg device with specified attributes (Width, Height, Resolution)
@@ -40,6 +41,9 @@ namespace PdfToImages
 
         public static string ConvertPDFtoImage(string fileName, int pageNumber = 1, bool allPages = false)
         {
+            var editor = new PdfPageEditor();
+            editor.BindPdf(fileName);
+
             var guid = Guid.NewGuid().ToString();
             var pdfDocument = new Document(fileName);
 
@@ -47,11 +51,17 @@ namespace PdfToImages
             {
                 foreach (var page in pdfDocument.Pages)
                 {
-                    GetPdfPagePreview(guid, page);
+                    PageSize size = editor.GetPageSize(page.Number);
+                    var isLandscape = size.Width > size.Height;
+
+                    GetPdfPagePreview(guid, page, isLandscape);
                 }
             }
             else {
-                GetPdfPagePreview(guid, pdfDocument.Pages[pageNumber]);
+                PageSize size = editor.GetPageSize(pageNumber);
+                var isLandscape = size.Width > size.Height;
+
+                GetPdfPagePreview(guid, pdfDocument.Pages[pageNumber], isLandscape);
             }  
 
             return guid;
